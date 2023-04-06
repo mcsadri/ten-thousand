@@ -1,6 +1,10 @@
 import random
 from collections import Counter
 
+"""
+pair programming partners: Deiosha Sparks & Manuch Sadri
+GameLogic.calculate_score solution with assistance from ChatGPT
+"""
 
 class GameLogic:
 
