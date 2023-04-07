@@ -16,8 +16,13 @@ class GameLogic:
         :return: a tuple of n numbers/ints each in between 1 - 6, like a standard 6 sided dice
         """
 
-        #using tuple comprehension generate and return n random integers between 1 and 6 (inclusive)
-        return tuple(random.randint(1, 6) for _ in range(n))
+        # if the dice roll count is 1-6
+        if 1 <= n <= 6:
+            # using tuple comprehension generate and return n random integers between 1 and 6 (inclusive)
+            return tuple(random.randint(1, 6) for _ in range(n))
+        else:
+            print("Stop Cheating")
+            return "Stop Cheating"
 
 
     @staticmethod
@@ -40,10 +45,10 @@ class GameLogic:
         # for each in a range of 0 up to the integer length of count
         for num in range(0, len(count)):
             # ones
-            # if the count of 1s is <= 2 add 100 × count of 1s to the score
+            # if the count of 1s is <= 2 add 100 * count of 1s to the score
             if count[num][0] == 1 and count[num][1] <= 2:
                 score += 100 * count[num][1]
-            # if the count of 1s is >= 2 add 1000 × count-2 of 1s to the score
+            # if the count of 1s is >= 2 add 1000 * count-2 of 1s to the score
             if count[num][0] == 1 and count[num][1] >= 4:
                 score += 1000 * (count[num][1] - 2)
             # if the count of 1s is 3 add 1000 to the score
@@ -51,33 +56,33 @@ class GameLogic:
                 score += 1000
 
             # twos
-            # if the count of 2s is >= 3 add 200 × count-2 of 2s to the score
+            # if the count of 2s is >= 3 add 200 * count-2 of 2s to the score
             if count[num][0] == 2 and count[num][1] >= 3:
                 score += 200 * (count[num][1] - 2)
 
             # threes
-            # if the count of 3s is >= 3 add 300 × count-2 of 3s to the score
+            # if the count of 3s is >= 3 add 300 * count-2 of 3s to the score
             if count[num][0] == 3 and count[num][1] >= 3:
                 score += 300 * (count[num][1] - 2)
 
             # fours
-            # if the count of 4s is >= 3 add 400 × count-2 of 4s to the score
+            # if the count of 4s is >= 3 add 400 * count-2 of 4s to the score
             if count[num][0] == 4 and count[num][1] >= 3:
                 score += 400 * (count[num][1] - 2)
 
             # fives
-            # if the count of 5s is <= 2 add 50 × count of 5s to the score
+            # if the count of 5s is <= 2 add 50 * count of 5s to the score
             if count[num][0] == 5 and count[num][1] <= 2:
                 score += 50 * count[num][1]
             # if the count of 5s is == 3 add 500 to the score
             if count[num][0] == 5 and count[num][1] == 3:
                score += 500
-            # if the count of 5s is > 3 add 500 × count-2 of 5s to the score
+            # if the count of 5s is > 3 add 500 * count-2 of 5s to the score
             if count[num][0] == 5 and count[num][1] > 3:
                 score += 500 * (count[num][1] - 2)
 
             # sixes
-            # if the count of 6s is >= 3 add 600 × count-2 of 6s to the score
+            # if the count of 6s is >= 3 add 600 * count-2 of 6s to the score
             if count[num][0] == 6 and count[num][1] >= 3:
                 score += 600 * (count[num][1] - 2)
 

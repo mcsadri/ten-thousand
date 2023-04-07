@@ -47,8 +47,8 @@ Overview: Create a command line game to play Farkle. Lab 06 will roll dice and c
 
 ### Stretch Goals
 
-- Research parametrized tests in PyTest
-- Research Behavior Driven Development
+- Research parametrized tests in PyTest - did not attempt
+- Research Behavior Driven Development - did not attempt
 
 ---
 
@@ -66,14 +66,16 @@ Overview: Create a command line game to play Farkle. Lab 06 will roll dice and c
 
 - set-up virtual env
   - \> ```python3.11 -m venv .venv```
+- activate virtual env
   - \> ```source .venv/bin/activate```
+- install pytest
   - \> ```pip install pytest```
 - run cli app
   - \> ```python ten_thousand/game_logic.py```
 - run pytest
-  - \> ```pytest tests/test_roll_dice```
-  - \> ```pytest tests/test_calculate_score```
-
+  - \> ```pytest```
+    - \> ```pytest tests/test_roll_dice```
+    - \> ```pytest tests/test_calculate_score```
 - deactivate virtual env
   - \> ```deactivate```
 
@@ -81,8 +83,8 @@ Overview: Create a command line game to play Farkle. Lab 06 will roll dice and c
 
 - Tests
     - How do you run tests?
-      - doodah
+      - run pytest from a virtual environment (see `How to initialize/run your application...` above)
     - Any tests of note?
-      - doodah
+      - n/a
     - Describe any tests that you did not complete, skipped, etc
-      - doodah
+      - n/a

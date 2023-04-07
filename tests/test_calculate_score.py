@@ -2,9 +2,6 @@ import pytest
 from ten_thousand.game_logic import GameLogic
 
 
-#pytestmark = [pytest.mark.version_1]
-
-
 def test_single_five():
     actual = GameLogic.calculate_score((5,))
     expected = 50
@@ -93,6 +90,7 @@ def test_six_ones():
     actual = GameLogic.calculate_score((1, 1, 1, 1, 1, 1))
     expected = 4000
     assert actual == expected
+
 
 def test_three_ones_three_fives():
     actual = GameLogic.calculate_score((1, 1, 1, 5, 5, 5))

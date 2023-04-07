@@ -8,8 +8,6 @@
 import pytest
 from ten_thousand.game_logic import GameLogic
 
-#pytestmark = [pytest.mark.version_1]
-
 
 def test_1_dice():
     values = GameLogic.roll_dice(1)
@@ -56,3 +54,15 @@ def test_6_dice():
 
     for value in values:
         assert 1 <= value <= 6
+
+
+def test_0_dice():
+    values = GameLogic.roll_dice(0)
+    assert len(values) == 13
+    assert values == "Stop Cheating"
+
+
+def test_7_dice():
+    values = GameLogic.roll_dice(7)
+    assert len(values) == 13
+    assert values == "Stop Cheating"
