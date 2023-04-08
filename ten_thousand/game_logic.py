@@ -10,7 +10,7 @@ GameLogic.calculate_score solution with assistance from ChatGPT
 class GameLogic:
 
     @staticmethod
-    def roll_dice(n):
+    def roll_dice(n=6):
         """
         roll n qty of standard 6 sided dice, and returns the dice roll values in between 1 - 6.
         :param n: number of dice rolled
@@ -18,7 +18,11 @@ class GameLogic:
         """
         if 1 <= n <= 6:
             # using tuple comprehension generate and return n random integers between 1 and 6 (inclusive)
-            return tuple(random.randint(1, 6) for _ in range(n))
+            #return tuple(random.randint(1, 6) for _ in range(n))
+            rolled_dice = tuple(random.randint(1, 6) for _ in range(n))
+            print(rolled_dice)
+            return rolled_dice
+
         else:
             print("Stop Cheating")
             return "Stop Cheating"
@@ -101,14 +105,25 @@ class GameLogic:
     @staticmethod
     def play():
         print("Welcome to Ten Thousand")
-        while True:
+        count = 0
+        score = 0
+        dice_qty = 6
+        while True and count < 5:
             print("(y)es to play or (n)o to quit")
             player_input = input("> ")
-            if player_input == "n":
-                GameLogic.quit()
+            if player_input == "n" or count == 4 or dice_qty == 0:
+                GameLogic.quit(count=count, score=score)
                 break
             elif player_input == "y":
-                GameLogic.roll_dice(3)
+                count += 1
+                GameLogic.roll_dice(dice_qty)
+                print("Enter dice to keep, or (q)uit:")
+                banked_dice = input("> ")
+                dice_qty -= len(banked_dice)
+                scoring_dice = tuple(int(digit) for digit in banked_dice)
+                score += GameLogic.calculate_score(scoring_dice)
+                print(f"Your total score is {score}")
+
 
     @staticmethod
     def quit(score=0, count=0):
