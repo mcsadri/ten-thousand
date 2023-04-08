@@ -6,6 +6,7 @@ pair programming partners: Deiosha Sparks & Manuch Sadri
 GameLogic.calculate_score solution with assistance from ChatGPT
 """
 
+
 class GameLogic:
 
     @staticmethod
@@ -15,15 +16,12 @@ class GameLogic:
         :param n: number of dice rolled
         :return: a tuple of n numbers/ints each in between 1 - 6, like a standard 6 sided dice
         """
-
-        # if the dice roll count is 1-6
         if 1 <= n <= 6:
             # using tuple comprehension generate and return n random integers between 1 and 6 (inclusive)
             return tuple(random.randint(1, 6) for _ in range(n))
         else:
             print("Stop Cheating")
             return "Stop Cheating"
-
 
     @staticmethod
     def calculate_score(roll):
@@ -76,7 +74,7 @@ class GameLogic:
                 score += 50 * count[num][1]
             # if the count of 5s is == 3 add 500 to the score
             if count[num][0] == 5 and count[num][1] == 3:
-               score += 500
+                score += 500
             # if the count of 5s is > 3 add 500 * count-2 of 5s to the score
             if count[num][0] == 5 and count[num][1] > 3:
                 score += 500 * (count[num][1] - 2)
@@ -100,11 +98,34 @@ class GameLogic:
         # return the value of score
         return score
 
+    @staticmethod
+    def play():
+        print("Welcome to Ten Thousand")
+        while True:
+            print("(y)es to play or (n)o to quit")
+            player_input = input("> ")
+            if player_input == "n":
+                GameLogic.quit()
+                break
+            elif player_input == "y":
+                GameLogic.roll_dice(3)
+
+    @staticmethod
+    def quit(score=0, count=0):
+        if count == 0:
+            print("OK. Maybe another time")
+        else:
+            print(f"Thanks for playing! You earned {score} points")
+        pass
+
 
 if __name__ == "__main__":
     # declare new variable dice_roll and set it = the results of GameLogic.roll_dice with an int argument of 6
-    dice_roll = GameLogic.roll_dice(6)
-    # print the value of dice_roll to stdout
-    print(f"You rolled: {dice_roll}")
-    # print the returned score value from GameLogic.calculate_score(dice_roll) to stdout
-    print(f"Your score is {GameLogic.calculate_score(dice_roll)}")
+    # dice_roll = GameLogic.roll_dice(7)
+    # # print the value of dice_roll to stdout
+    # print(dice_roll)
+    # # print the returned score value from GameLogic.calculate_score(dice_roll) to stdout
+    # print(GameLogic.calculate_score(dice_roll))
+    # print(len("Stop Cheating"))
+
+    GameLogic.play()

@@ -1,9 +1,15 @@
-prompt = Image you're a python dev and need to write a static method named calculate_score which has an input with a tuple of integers and returns an integer
-OUTPUT: class MyClass:
-    @staticmethod
-    def calculate_score(numbers: tuple[int]) -> int:
-        score = sum(numbers)
-        return score
+# ChatGPT prompts & results
+
+## prompt
+Image you're a python dev and need to write a static method named calculate_score which has an input with a tuple of integers and returns an integer
+## OUTPUT:
+```python
+    class MyClass:
+        @staticmethod
+        def calculate_score(numbers: tuple[int]) -> int:
+            score = sum(numbers)
+            return score
+```
 prompt = Identify patterns to simplify logic scoring rules.
 OUTPUT: Looking at the data, we can observe some patterns that can help us simplify the logic:
 
@@ -133,6 +139,7 @@ can you write a method for this to be true: def test_three_fives():
     assert actual == expected
 
 output:
+```python
 @staticmethod
 def calculate_score(roll):
     score = 0
@@ -189,3 +196,4 @@ def calculate_score(roll):
             score += 500
         
     return score
+```
