@@ -1,5 +1,6 @@
 import random
 from collections import Counter
+import re
 
 """
 pair programming partners: Deiosha Sparks & Manuch Sadri
@@ -32,13 +33,17 @@ class GameLogic:
     def play_round(total_score, count):
         dice_qty = 6
         score = 0
-        player_input = "r"
+        player_input = str()
         print(f"Starting round {count}")
-        while player_input == "r":
+        while player_input != "b" and player_input != "q":
             print(f"Rolling {dice_qty} dice...")
             GameLogic.roll_dice(dice_qty)
-            print("Enter dice to keep, or (q)uit:")
-            banked_dice = input("> ")
+            while True:
+                pattern = r"^(?:[1-6]{1,6}|q)$"     # regex pattern via assistance from ChatGPT
+                print("Enter dice to keep, or (q)uit:")
+                banked_dice = (input("> ")).lower()
+                if re.match(pattern, banked_dice):
+                    break
             if banked_dice == "q":
                 GameLogic.quit(total_score, count)
             else:
@@ -46,8 +51,11 @@ class GameLogic:
                 scoring_dice = tuple(int(digit) for digit in banked_dice)
                 score += GameLogic.calculate_score(scoring_dice)
                 print(f"You have {score} unbanked points and {dice_qty} dice remaining")
-                print("(r)oll again, (b)ank your points or (q)uit:")
-                player_input = input("> ")
+                while True:
+                    print("(r)oll again, (b)ank your points or (q)uit:")
+                    player_input = (input("> ")).lower()
+                    if player_input in ["r", "b", "q"]:
+                        break
                 if player_input == "q":
                     GameLogic.quit(total_score, count)
                 elif player_input == "b":
