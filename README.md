@@ -14,6 +14,10 @@ Overview: Extend Ten Thousand game started in previous class to get the game in 
 - [X] Application should keep track of total score
 - [X] Application should keep track of current round
 
+### Planning
+
+![GameLogic Planning Flowchart](assets/game_logic_planning_flowchart.jpg)
+
 ### Testing Details
 
 - n/a
