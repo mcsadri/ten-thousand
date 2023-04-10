@@ -30,6 +30,34 @@ class GameLogic:
 
 
     @staticmethod
+    def roll_bank_quit(score, dice_qty, total_score, count):
+        print(f"You have {score} unbanked points and {dice_qty} dice remaining")
+        while True:
+            print("(r)oll again, (b)ank your points or (q)uit:")
+            player_input = (input("> ")).lower()
+            if player_input in ["r", "b", "q"]:
+                break
+        if player_input == "q":
+            GameLogic.quit(total_score, count)
+        elif player_input == "b":
+            print(f"You banked {score} points in round {count}")
+            total_score += score
+            print(f"Total score is {total_score} points")
+        return player_input, total_score
+
+
+    @staticmethod
+    def bank_dice():
+        while True:
+            pattern = r"^(?:[1-6]{1,6}|q)$"  # regex pattern via assistance from ChatGPT
+            print("Enter dice to keep, or (q)uit:")
+            banked_dice = (input("> ")).lower()
+            if re.match(pattern, banked_dice):
+                break
+        return banked_dice
+
+
+    @staticmethod
     def play_round(total_score, count):
         dice_qty = 6
         score = 0
@@ -38,30 +66,14 @@ class GameLogic:
         while player_input != "b" and player_input != "q":
             print(f"Rolling {dice_qty} dice...")
             GameLogic.roll_dice(dice_qty)
-            while True:
-                pattern = r"^(?:[1-6]{1,6}|q)$"     # regex pattern via assistance from ChatGPT
-                print("Enter dice to keep, or (q)uit:")
-                banked_dice = (input("> ")).lower()
-                if re.match(pattern, banked_dice):
-                    break
+            banked_dice = GameLogic.bank_dice()
             if banked_dice == "q":
                 GameLogic.quit(total_score, count)
             else:
                 dice_qty -= len(banked_dice)
                 scoring_dice = tuple(int(digit) for digit in banked_dice)
                 score += GameLogic.calculate_score(scoring_dice)
-                print(f"You have {score} unbanked points and {dice_qty} dice remaining")
-                while True:
-                    print("(r)oll again, (b)ank your points or (q)uit:")
-                    player_input = (input("> ")).lower()
-                    if player_input in ["r", "b", "q"]:
-                        break
-                if player_input == "q":
-                    GameLogic.quit(total_score, count)
-                elif player_input == "b":
-                    print(f"You banked {score} points in round {count}")
-                    total_score += score
-                    print(f"Total score is {total_score} points")
+                player_input, total_score = GameLogic.roll_bank_quit(score, dice_qty, total_score, count)
         return total_score, count
 
 
