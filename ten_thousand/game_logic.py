@@ -31,6 +31,14 @@ class GameLogic:
 
     @staticmethod
     def roll_bank_quit(score, dice_qty, total_score, count):
+        """
+        prompt the player to either roll again, bank the current score, or quit the game
+        :param score: (int) holds current roll scoring
+        :param dice_qty: (int) holds current qty of dice to be rolled, range 1-6
+        :param total_score: (int) holds cumulative game score
+        :param count: (int) holds counter value for # of game rounds played
+        :return: player_input (string), total_score (int)
+        """
         print(f"You have {score} unbanked points and {dice_qty} dice remaining")
         while True:
             print("(r)oll again, (b)ank your points or (q)uit:")
@@ -48,6 +56,10 @@ class GameLogic:
 
     @staticmethod
     def bank_dice():
+        """
+        prompt the user to either specify which of the rolled dice they want to keep for scoring, or quit
+        :return: banked_dice (string)
+        """
         while True:
             pattern = r"^(?:[1-6]{1,6}|q)$"  # regex pattern via assistance from ChatGPT
             print("Enter dice to keep, or (q)uit:")
@@ -59,6 +71,12 @@ class GameLogic:
 
     @staticmethod
     def play_round(total_score, count):
+        """
+        play one round of the game Ten Thousand
+        :param total_score: (int) holds cumulative game score
+        :param count: (int) holds counter value for # of game rounds played
+        :return: total_score (int), count (int)
+        """
         dice_qty = 6
         score = 0
         player_input = str()
@@ -79,6 +97,12 @@ class GameLogic:
 
     @staticmethod
     def quit(total_score=0, count=0):
+        """
+        quit the game, and display the player's score if they played one or more rounds
+        :param total_score: (int) holds cumulative game score
+        :param count: (int) holds counter value for # of game rounds played
+        :return: none
+        """
         if count == 0:
             print("OK. Maybe another time")
         else:
@@ -88,6 +112,10 @@ class GameLogic:
 
     @staticmethod
     def welcome():
+        """
+        display a welcome message to the player, and verify they want to play
+        :return: none
+        """
         player_input = str()
         print("Welcome to Ten Thousand")
         while player_input != "y":
@@ -99,6 +127,10 @@ class GameLogic:
 
     @staticmethod
     def play_game():
+        """
+        manages the Ten Thousand game, tracks cumlative score, round #, and limits game to 20 maximum rounds
+        :return: none
+        """
         count = 0
         total_score = 0
         has_played = False  # added variable to keep track of whether the player has already entered "y"
@@ -118,7 +150,6 @@ class GameLogic:
         :param: roll: a tuple containing the results the rolled dice
         :return: score: an integer value calculated according to the Ten Thousand scoring rule
         """
-
         # declare new int variable score = 0
         score = 0
         # declare new int variable count_pair = 0
