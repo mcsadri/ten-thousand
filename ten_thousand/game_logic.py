@@ -128,7 +128,7 @@ class GameLogic:
     @staticmethod
     def play_game():
         """
-        manages the Ten Thousand game, tracks cumlative score, round #, and limits game to 20 maximum rounds
+        manages the Ten Thousand game, tracks cumulative score, round #, and limits game to 20 maximum rounds
         :return: none
         """
         count = 0

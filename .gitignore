@@ -1,8 +1,6 @@
 # See https://help.github.com/articles/ignoring-files/ for more about ignoring files.
 # Sample Python .gitignore: https://github.com/github/gitignore/blob/main/Python.gitignore
 
-/ten_thousand/game_logic_bak.py
-
 # Environments
 .env
 .venv
