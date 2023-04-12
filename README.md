@@ -2,12 +2,12 @@
 
 ## Project: Ten Thousand (akd Code Fellows plays Farkle-ish)
 
-Lab 08 Overview:
+## Authors: Manuch Sadri & Deiosha Sparks
+
+### Lab 08 Overview:
 - The game should now be close to playable - for honest players at least.
 - Let’s shore up the core functionality of game by allowing users to set aside scoring dice and continuing their turn.
 - Then we’ll handle cheaters and/or confused players who are skirting the rules.
-
-## Authors: Manuch Sadri & Deiosha Sparks
 
 ### Feature Tasks and Requirements
 
