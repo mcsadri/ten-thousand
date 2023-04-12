@@ -1,18 +1,24 @@
-# LAB - Class 06
+# LAB - Class 08
 
 ## Project: Ten Thousand (akd Code Fellows plays Farkle-ish)
 
-Overview: Extend Ten Thousand game started in previous class to get the game in playable state.
+Lab 08 Overview:
+- The game should now be close to playable - for honest players at least.
+- Let’s shore up the core functionality of game by allowing users to set aside scoring dice and continuing their turn.
+- Then we’ll handle cheaters and/or confused players who are skirting the rules.
 
 ## Authors: Manuch Sadri & Deiosha Sparks
 
 ### Feature Tasks and Requirements
 
-- [X] Application should implement all features from previous version
-- [X] Application should allow user to set aside dice each roll
-- [X] Application should allow “banking” current score or rolling again.
-- [X] Application should keep track of total score
-- [X] Application should keep track of current round
+- [ ] Application should implement features from versions 1 and 2
+- [ ] Should handle setting aside scoring dice and continuing turn with remaining dice.
+- [ ] Should handle when cheating occurs.
+  - [ ] Or just typos.
+  - [ ] E.g. roll = `[1,3,5,2]` and user selects `1, 1, 1, 1, 1, 1`
+- [ ]  Should allow user to continue rolling with 6 new dice when all dice have scored in current turn.
+- [ ] Handle **zilch**
+  - [ ] No points for round, and round is over
 
 ### Planning
 
@@ -24,14 +30,12 @@ Overview: Extend Ten Thousand game started in previous class to get the game in 
 
 ### User Acceptance Testing
 
-- Starter code contains “simulation” text files.
-  - E.g. `tests/version_2/quitter.sim.txt`
-- NOTE: Feel free to add more simulations, but you are required to pass all existing ones.
-- The simulations are the official documentation of the features for the day.
+- [ ] Must pass provided unit and simulation tests.
 
 ### Stretch Goals
 
-- [ ] Application should have automated tests to ensure proper operation
+- [ ] Identify features to add and propose idea to client.
+- [ ] Identify gaps in current test suite and add tests to expose bugs.
 
 ---
 
