@@ -20,10 +20,6 @@
 - [ ] Handle **zilch**
   - [ ] No points for round, and round is over
 
-### Planning
-
-![GameLogic Planning Flowchart](assets/game_logic_planning_flowchart.jpg)
-
 ### Testing Details
 
 - n/a
@@ -36,6 +32,12 @@
 
 - [ ] Identify features to add and propose idea to client.
 - [ ] Identify gaps in current test suite and add tests to expose bugs.
+
+---
+
+### Planning
+
+![GameLogic Planning Flowchart](assets/game_logic_planning_flowchart.jpg)
 
 ---
 
