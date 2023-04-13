@@ -2,11 +2,6 @@ import random
 from collections import Counter
 import re
 
-"""
-pair programming partners: Deiosha Sparks & Manuch Sadri
-GameLogic.calculate_score solution with assistance from ChatGPT
-"""
-
 
 class GameLogic:
 
@@ -28,32 +23,6 @@ class GameLogic:
             print("Stop Cheating")
             return "Stop Cheating"
 
-
-    @staticmethod
-    def roll_bank_quit(score, dice_qty, total_score, count):
-        """
-        prompt the player to either roll again, bank the current score, or quit the game
-        :param score: (int) holds current roll scoring
-        :param dice_qty: (int) holds current qty of dice to be rolled, range 1-6
-        :param total_score: (int) holds cumulative game score
-        :param count: (int) holds counter value for # of game rounds played
-        :return: player_input (string), total_score (int)
-        """
-        print(f"You have {score} unbanked points and {dice_qty} dice remaining")
-        while True:
-            print("(r)oll again, (b)ank your points or (q)uit:")
-            player_input = (input("> ")).lower()
-            if player_input in ["r", "b", "q"]:
-                break
-        if player_input == "q":
-            GameLogic.quit(total_score, count)
-        elif player_input == "b":
-            print(f"You banked {score} points in round {count}")
-            total_score += score
-            print(f"Total score is {total_score} points")
-        return player_input, total_score
-
-
     @staticmethod
     def bank_dice():
         """
@@ -68,30 +37,42 @@ class GameLogic:
                 break
         return banked_dice
 
+    @staticmethod
+    def roll_bank_quit(score, dice_qty, total_score, count):
+        roll_score = 0
+        print(f"You have {score} unbanked points and {dice_qty} dice remaining")
+        while True:
+            print("(r)oll again, (b)ank your points or (q)uit:")
+            player_input = (input("> ")).lower()
+            if player_input in ["r", "b", "q"]:
+                break
+        if player_input == "q":
+            GameLogic.quit(total_score, count)
+        elif player_input == "b":
+            print(f"You banked {score} points in round {count}")
+            total_score += score
+            print(f"Total score is {total_score} points")
+        elif player_input == "r" and dice_qty == 0:
+            GameLogic.print_zilch()
+            player_input = "z"
+        return player_input, total_score
+
+    @staticmethod
+    def print_zilch():
+        print("*" * 40)
+        print("**        Zilch!!! Round over         **")
+        print("*" * 40)
 
     @staticmethod
     def play_round(total_score, count):
-        """
-        play one round of the game Ten Thousand
-        :param total_score: (int) holds cumulative game score
-        :param count: (int) holds counter value for # of game rounds played
-        :return: total_score (int), count (int)
-        """
         dice_qty = 6
         score = 0
         player_input = str()
         print(f"Starting round {count}")
-        while player_input != "b" and player_input != "q":
+        while player_input != "b" and player_input != "q" and player_input != "z":
             print(f"Rolling {dice_qty} dice...")
             rolled_dice = GameLogic.roll_dice(dice_qty)
-            if GameLogic.calculate_score(rolled_dice) == 0:
-                print("****************************************")
-                print("**        Zilch!!! Round over         **")
-                print("****************************************")
-            if dice_qty == 0:
-                break
-            elif dice_qty > 0:
-                banked_dice = GameLogic.bank_dice()
+            banked_dice = GameLogic.bank_dice()
             if banked_dice == "q":
                 GameLogic.quit(total_score, count)
             else:
@@ -99,8 +80,13 @@ class GameLogic:
                 scoring_dice = tuple(int(digit) for digit in banked_dice)
                 score += GameLogic.calculate_score(scoring_dice)
                 player_input, total_score = GameLogic.roll_bank_quit(score, dice_qty, total_score, count)
+                if player_input == "z":
+                    score = 0
+        if score == 0 and dice_qty == 0:
+            GameLogic.print_zilch()
+            print(f"You banked 0 points in round {count}")
+            print(f"Total score is {total_score} points")
         return total_score, count
-
 
     @staticmethod
     def quit(total_score=0, count=0):
@@ -116,7 +102,6 @@ class GameLogic:
             print(f"Thanks for playing! You earned {total_score} points")
         exit()
 
-
     @staticmethod
     def welcome():
         """
@@ -130,7 +115,6 @@ class GameLogic:
             player_input = (input("> ")).lower()
             if player_input == "n":
                 GameLogic.quit(0, 0)
-
 
     @staticmethod
     def play_game():
@@ -148,7 +132,6 @@ class GameLogic:
             count += 1
             total_score, count = GameLogic.play_round(total_score, count)
         GameLogic.quit(total_score, count)
-
 
     @staticmethod
     def calculate_score(roll):
@@ -223,7 +206,6 @@ class GameLogic:
 
         # return the value of score
         return score
-
 
 if __name__ == "__main__":
     GameLogic.play_game()
