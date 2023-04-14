@@ -17,16 +17,10 @@ class GameLogic:
         :param: number of dice rolled
         :return: a tuple of n numbers/ints each in between 1 - 6, like a standard 6 sided dice
         """
-        # if 1 <= n <= 6:
-            # using tuple comprehension generate and return n random integers between 1 and 6 (inclusive)
-            # return tuple(random.randint(1, 6) for _ in range(n))
         rolled_dice = tuple(random.randint(1, 6) for _ in range(n))
         output = "*** " + " ".join(str(i) for i in rolled_dice) + " ***"
         print(output)
         return rolled_dice
-        # else:
-        #     print("Stop Cheating")
-        #     return "Stop Cheating"
 
     @staticmethod
     def roll_bank_quit(score, dice_qty, total_score, count):
@@ -53,18 +47,29 @@ class GameLogic:
         return player_input, total_score
 
     @staticmethod
-    def bank_dice():
+    def bank_dice(rolled_dice):
         """
         prompt the user to either specify which of the rolled dice they want to keep for scoring, or quit
         :return: banked_dice (string)
         """
-        while True:
-            pattern = r"^(?:[1-6]{1,6}|q)$"  # regex pattern via assistance from ChatGPT
+        cheater = True
+        while cheater:
             print("Enter dice to keep, or (q)uit:")
             banked_dice = (input("> ")).lower()
-            if re.match(pattern, banked_dice):
-                break
+            player_input = tuple(int(digit) for digit in banked_dice)
+            for num in player_input:
+                if player_input.count(num) > rolled_dice.count(num):
+                    print("Cheater!!! Or possibly made a typo...")
+                    output = "*** " + " ".join(str(i) for i in rolled_dice) + " ***"
+                    print(output)
+                    print("inside if cheater = ", cheater)
+                    break
+                else:
+                    cheater = False
+                    print("inside else cheater = ", cheater)
         return banked_dice
+
+
 
     def play_round(total_score, count):
         """
@@ -85,7 +90,7 @@ class GameLogic:
                 print("**        Zilch!!! Round over         **")
                 print("****************************************")
                 break
-            banked_dice = GameLogic.bank_dice()
+            banked_dice = GameLogic.bank_dice(rolled_dice)
             if banked_dice == "q":
                 GameLogic.quit(total_score, count)
             else:
