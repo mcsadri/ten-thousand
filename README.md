@@ -37,7 +37,7 @@
 
 ### Planning
 
-![GameLogic Planning Flowchart](assets/game_logic_planning_flowchart.jpg)
+- n/a
 
 ---
 
