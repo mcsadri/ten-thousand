@@ -91,11 +91,10 @@ class GameLogic:
             else:
                 dice_qty -= len(banked_dice)
                 scoring_dice = tuple(int(digit) for digit in banked_dice)
+                if dice_qty == 0 and GameLogic.calculate_score(scoring_dice) != 0:
+                    dice_qty = 6
                 score += GameLogic.calculate_score(scoring_dice)
                 player_input, total_score = GameLogic.roll_bank_quit(score, dice_qty, total_score, count)
-        total_score += score
-        print(f"You banked {score} points in round {count}")
-        print(f"Total score is {total_score} points")
         count += 1
         if dice_qty == 0:
             print("****************************************")
