@@ -1,6 +1,5 @@
 import random
 from collections import Counter
-import re
 
 """
 pair programming partners: Deiosha Sparks & Manuch Sadri
@@ -56,9 +55,9 @@ class GameLogic:
         while cheater:
             print("Enter dice to keep, or (q)uit:")
             banked_dice = (input("> ")).lower()
-            player_input = tuple(int(digit) for digit in banked_dice)
-            for num in player_input:
-                if player_input.count(num) > rolled_dice.count(num):
+            banked_dice = tuple(int(digit) for digit in banked_dice if digit.isnumeric())
+            for num in banked_dice:
+                if banked_dice.count(num) > rolled_dice.count(num):
                     print("Cheater!!! Or possibly made a typo...")
                     output = "*** " + " ".join(str(i) for i in rolled_dice) + " ***"
                     print(output)
@@ -68,7 +67,7 @@ class GameLogic:
         return banked_dice
 
 
-
+    @staticmethod
     def play_round(total_score, count):
         """
         play one round of the game Ten Thousand
