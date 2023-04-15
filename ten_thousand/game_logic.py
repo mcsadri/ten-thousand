@@ -62,11 +62,9 @@ class GameLogic:
                     print("Cheater!!! Or possibly made a typo...")
                     output = "*** " + " ".join(str(i) for i in rolled_dice) + " ***"
                     print(output)
-                    print("inside if cheater = ", cheater)
                     break
                 else:
                     cheater = False
-                    print("inside else cheater = ", cheater)
         return banked_dice
 
 
