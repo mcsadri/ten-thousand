@@ -1,4 +1,5 @@
 import random
+import os
 from collections import Counter
 
 """
@@ -8,6 +9,11 @@ GameLogic.calculate_score solution with assistance from ChatGPT
 
 
 class GameLogic:
+    def __init__(self, mock_rolls=None):
+        self.mock_rolls = mock_rolls
+
+    def mock_roller(self, _):
+        return self.mock_rolls.pop(0)
 
     @staticmethod
     def roll_dice(n=6):
@@ -17,8 +23,6 @@ class GameLogic:
         :return: a tuple of n numbers/ints each in between 1 - 6, like a standard 6 sided dice
         """
         rolled_dice = tuple(random.randint(1, 6) for _ in range(n))
-        output = "*** " + " ".join(str(i) for i in rolled_dice) + " ***"
-        print(output)
         return rolled_dice
 
     @staticmethod
@@ -54,7 +58,9 @@ class GameLogic:
         cheater = True
         while cheater:
             print("Enter dice to keep, or (q)uit:")
-            banked_dice = (input("> ")).lower()
+            banked_dice = input("> ").lower()
+            if banked_dice == "q":
+                return banked_dice
             banked_dice = tuple(int(digit) for digit in banked_dice if digit.isnumeric())
             for num in banked_dice:
                 if banked_dice.count(num) > rolled_dice.count(num):
@@ -68,11 +74,12 @@ class GameLogic:
 
 
     @staticmethod
-    def play_round(total_score, count):
+    def play_round(total_score, count, roller):
         """
         play one round of the game Ten Thousand
         :param total_score: (int) holds cumulative game score
         :param count: (int) holds counter value for # of game rounds played
+        :param roller: (callback function) a reference to the rolling function
         :return: total_score (int), count (int)
         """
         dice_qty = 6
@@ -81,7 +88,9 @@ class GameLogic:
         print(f"Starting round {count}")
         while player_input != "b" and player_input != "q":
             print(f"Rolling {dice_qty} dice...")
-            rolled_dice = GameLogic.roll_dice(dice_qty)
+            rolled_dice = roller(dice_qty)
+            output = "*** " + " ".join(str(i) for i in rolled_dice) + " ***"
+            print(output)
             if GameLogic.calculate_score(rolled_dice) == 0:
                 print("****************************************")
                 print("**        Zilch!!! Round over         **")
@@ -116,7 +125,7 @@ class GameLogic:
             print("OK. Maybe another time")
         else:
             print(f"Thanks for playing! You earned {total_score} points")
-        exit()
+        os._exit(0)
 
     @staticmethod
     def welcome():
@@ -133,7 +142,7 @@ class GameLogic:
                 GameLogic.quit(0, 0)
 
     @staticmethod
-    def play_game():
+    def play_game(roller = roll_dice):
         """
         manages the Ten Thousand game, tracks cumulative score, round #, and limits game to 20 maximum rounds
         :return: none
@@ -145,7 +154,7 @@ class GameLogic:
             if not has_played:  # check if the player has already entered "y"
                 GameLogic.welcome()
                 has_played = True  # set the variable to True
-            total_score, count = GameLogic.play_round(total_score, count)
+            total_score, count = GameLogic.play_round(total_score, count, roller)
         GameLogic.quit(total_score, count - 1)
 
     @staticmethod
@@ -224,4 +233,6 @@ class GameLogic:
 
 
 if __name__ == "__main__":
+    # bank_first = GameLogic([(3, 2, 5, 4, 3, 3)])
+    # GameLogic.play_game(bank_first.mock_roller)
     GameLogic.play_game()

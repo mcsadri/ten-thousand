@@ -1,6 +1,6 @@
 import pytest
 from ten_thousand.game_logic import GameLogic
-from ten_thousand.game import play
+# from ten_thousand.game import play
 
 
 def extract_elements(lines, prefix, transform=lambda x: x):
@@ -30,14 +30,14 @@ def compare_output_and_expected(captured_output, lines):
 @pytest.mark.parametrize(
     "test_input",
     [
-        ("tests/sims/bank_first_for_two_rounds.sim.txt"),
-        ("tests/sims/bank_one_roll_then_quit.sim.txt"),
-        ("tests/sims/cheat_and_fix.sim.txt"),
-        ("tests/sims/hot_dice.sim.txt"),
-        ("tests/sims/one_and_done.sim.txt"),
-        ("tests/sims/quitter.sim.txt"),
-        ("tests/sims/repeat_roller.sim.txt"),
-        ("tests/sims/zilcher.sim.txt"),
+        "tests/sims/bank_first_for_two_rounds.sim.txt",
+        "tests/sims/bank_one_roll_then_quit.sim.txt",
+        "tests/sims/cheat_and_fix.sim.txt",
+        "tests/sims/hot_dice.sim.txt",
+        "tests/sims/one_and_done.sim.txt",
+        "tests/sims/quitter.sim.txt",
+        "tests/sims/repeat_roller.sim.txt",
+        "tests/sims/zilcher.sim.txt",
     ],
 )
 def test_all(monkeypatch, capsys, test_input):
@@ -51,10 +51,12 @@ def test_all(monkeypatch, capsys, test_input):
         print(prompt, response, sep="")
         return response
 
+    print(inputs)
+
     monkeypatch.setattr("builtins.input", mock_input)
 
     test_instance = GameLogic(mock_rolls)
-    play(test_instance.mock_roller)
+    GameLogic.play_game(test_instance.mock_roller)
 
     captured_output = capsys.readouterr().out
     compare_output_and_expected(captured_output, lines)

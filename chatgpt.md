@@ -197,3 +197,14 @@ def calculate_score(roll):
         
     return score
 ```
+
+## Prompt:
+python sys.exit() without writing to stdout
+## Response:
+If you want to exit a Python script without writing anything to stdout, you can use the <code>os._exit()</code> function instead of <code>sys.exit()</code>. The <code>os._exit()</code> function terminates the process immediately without performing any cleanup operations, including writing to stdout.
+Here's an example:
+```python
+import os
+os._exit(0)
+```
+This code will exit the Python script with an exit status of 0 and won't write anything to stdout. However, keep in mind that using <code>os._exit()</code> can cause issues in some cases, as it doesn't properly clean up resources like open file handles, threads, or subprocesses. Use it with caution and only when necessary.
