@@ -1,24 +1,31 @@
-# LAB - Class 08
+# LAB - Class 09
 
 ## Project: Ten Thousand (akd Code Fellows plays Farkle-ish)
 
 ## Authors: Manuch Sadri & Deiosha Sparks
 
-### Lab 08 Overview:
-- The game should now be close to playable - for honest players at least.
-- Let’s shore up the core functionality of game by allowing users to set aside scoring dice and continuing their turn.
-- Then we’ll handle cheaters and/or confused players who are skirting the rules.
+### Overview:
+- Continue work on command line version of the dice game `Ten Thousand` by adding an AI bot to play the game.
 
 ### Feature Tasks and Requirements
 
-- [X] Application should implement features from versions 1 and 2
-- [X] Should handle setting aside scoring dice and continuing turn with remaining dice.
-- [X] Should handle when cheating occurs.
-  - [X] Or just typos.
-  - [X] E.g. roll = `[1,3,5,2]` and user selects `1, 1, 1, 1, 1, 1`
-- [X]  Should allow user to continue rolling with 6 new dice when all dice have scored in current turn.
-- [X] Handle **zilch**
-  - [X] No points for round, and round is over
+- Create an AI Bot to play Ten Thousand
+  - The only method available for use from Game class is `play`.
+  - All static methods of `GameLogic` class are available.
+  - All other interactions with game can take place ONLY via the I/O features of the game.
+    - In other words, via injectable `print` and `input` functionality.
+    - It is FORBIDDEN to inject a custom `roller` function into Game class.
+
+- Copy bots.py to your project.
+  - Place it at root of project, at same level as `requirements.txt`
+
+- Your Bot class should be added to `bots.py` file with name of your choosing replacing `YourBot`.
+  - NOTE the code for `BaseBot` class is supplied for reference, but your custom code will be in the overridden `_roll_bank_or_quit` and/or `_enter_dice` methods.
+
+- User should be able to see your bot play by executing bots.py from terminal.
+- Application should implement all features from previous classes 
+
+- The goal is to beat Nervous Nellie - A reference bot that banks on the first roll every time.
 
 ### Testing Details
 
@@ -26,12 +33,12 @@
 
 ### User Acceptance Testing
 
-- [X] Must pass provided unit and simulation tests.
+- n/a
 
 ### Stretch Goals
 
-- [ ] Identify features to add and propose idea to client.
-- [ ] Identify gaps in current test suite and add tests to expose bugs.
+- [ ] Complete a whiteboard style step through of at least one of the sim files that includes dice rolling (your choice) and test_sims.py
+- [ ] Design the best performing bot! We'll showcase the bots on the start of class Tuesday, every team will have the opportunity to share their screen and show their bots running. Highest average score after 100,000 rounds wins. Winner take all
 
 ---
 
@@ -65,6 +72,8 @@
   - \> ```pytest```
     - \> ```pytest tests/test_roll_dice```
     - \> ```pytest tests/test_calculate_score```
+- run bots
+  - \> ```python bots.py```
 - deactivate virtual env
   - \> ```deactivate```
 
