@@ -1,11 +1,11 @@
-"""Place in root of Ten Thousand Project,
-at same level as pyproject.toml
+"""
+Place in root of Ten Thousand Project
 """
 
 from abc import ABC, abstractmethod
 import builtins
 import re
-from ten_thousand.game import Game
+# from ten_thousand.game import Game
 from ten_thousand.game_logic import GameLogic
 
 
@@ -113,9 +113,9 @@ class BaseBot(ABC):
 
         for _ in range(num_games):
             player = cls()
-            game = Game()
+            game = GameLogic()
             try:
-                game.play()
+                game.play_game()
             except SystemExit:
                 # in game system exit is fine
                 # because that's how they quit.
@@ -136,7 +136,7 @@ class NervousNellie(BaseBot):
         return "b"
 
 
-class YourBot(BaseBot):
+class ReadyRyan(BaseBot):
     def _roll_bank_or_quit(self):
         """your logic here"""
         return "b"
@@ -147,8 +147,17 @@ class YourBot(BaseBot):
 
         return super()._enter_dice()
 
+    class MiddlingMargaret(BaseBot):
+        """MiddlingMargaret has a moderate playing style"""
+
+        def _roll_bank_or_quit(self):
+            if self.unbanked_points >= 500 or self.dice_remaining < 3:
+                return "b"
+
+            return "r"
+
 
 if __name__ == "__main__":
     num_games = 100
     NervousNellie.play(num_games)
-    YourBot.play(num_games)
+    ReadyRyan.play(num_games)

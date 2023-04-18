@@ -1,5 +1,5 @@
 import pytest
-from ten_thousand.game_logic import GameLogic
+from ten_thousand.game_logic_bak import GameLogic
 
 
 def test_single_five():
